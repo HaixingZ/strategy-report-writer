@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strategy Report Writer"
+  short_description: "Confirm storyline first, orchestrate experts, and draft in a chosen style"
+  default_prompt: "Use $strategy-report-writer to confirm a strategy-report storyline first, then draft it in the default house style unless I specify another style."
