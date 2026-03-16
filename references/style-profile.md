@@ -19,7 +19,7 @@ Use this as the generic fallback writing reference for strategy reports. Treat i
 - Prefer short definition-style sentences such as “核心是”, “本质是”, “关键前提是”, “这意味着”.
 - Use numbers, ranges, and explicit tradeoffs when the evidence supports them.
 - Explain terminology with business meaning rather than stacking buzzwords.
-- Keep this file generic. Preset-specific quirks such as banned sentence formulas or punctuation habits belong in the selected preset, not here.
+- Keep this file generic. Preset-specific quirks belong in the selected preset, but system-level bans from [style-system.md](style-system.md) still apply here.
 
 ## Structural logic
 
@@ -35,6 +35,7 @@ Use this as the generic fallback writing reference for strategy reports. Treat i
 - Do not pile up concepts without defining them and tying them to a business consequence.
 - Do not fabricate precision when the evidence is weak.
 - Do not use dense jargon chains that assume insider context unless the user clearly wants that voice.
+- Do not use `不是……而是……` or close variants; keep the sentence direct without staged contrast formulas.
 
 ## Acceptance checklist
 

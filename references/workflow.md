@@ -27,9 +27,9 @@ Use this workflow when the user wants a strategy report that keeps RIS-style che
 7. Draft modules.
    Each expert owns one module end-to-end: judgment, key findings, evidence gaps, and first draft.
 8. Run partner review.
-   Review each module against the approved storyline and the active style profile. Use `ready` or `revise` only.
+   Review each module against the approved storyline and the active style profile. Use `ready` or `revise` only. The first review of an initial draft must be `revise` and must include at least one concrete modification request.
 9. Allow one rewrite round.
-   If a module is `revise`, send the module back to the same expert once with a concrete rewrite brief.
+   Send the module back to the same expert once with the concrete rewrite brief from the first review.
 10. Finalize the report.
     Produce `Final Delivery` only after all confirmed modules are `ready`. Append 1-3 Nano Banana prompts based on the completed report.
 
@@ -39,6 +39,7 @@ Use this workflow when the user wants a strategy report that keeps RIS-style che
 - Do not start any expert before module confirmation.
 - Do not let module changes quietly rewrite the thesis.
 - Do not add Nano Banana prompts before `Final Delivery`.
+- Do not let Partner Reviewer fully accept an initial draft. The first review must create a real revision pass.
 - Do not hide weak support. Explicitly label `Assumption` or `Evidence Gap` when support is incomplete.
 
 ## Rollback rules

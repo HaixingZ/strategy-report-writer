@@ -47,11 +47,11 @@ Use this preset when the user asks for "my style", references a previously suppl
 
 ## Hard constraints
 
-- Do not write `不是……而是……`
+- Do not write `不是……而是……` or close variants such as `并非……而是……` and `不是在……而是在……`
 - Do not use loose essay-style transitions
 - Do not hide evidence gaps with confident wording
 - Do not let style imitation override factual caution
 
 ## When to relax this preset
 
-Relax any of the above if the user explicitly asks for a different audience voice, another formatting scheme, or another sentence rhythm. Keep only the parts that still fit the request.
+Relax preset-specific preferences if the user explicitly asks for a different audience voice, another formatting scheme, or another sentence rhythm. Keep only the parts that still fit the request, but do not relax system-level bans from [style-system.md](../style-system.md).

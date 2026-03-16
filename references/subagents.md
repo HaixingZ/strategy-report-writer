@@ -56,12 +56,14 @@ Responsibilities:
 - Review one module at a time.
 - Check alignment with approved storyline.
 - Check fit with the active style profile.
-- Decide `ready` or `revise`.
-- Issue a focused rewrite brief when needed.
+- On the first pass, always decide `revise` and provide at least one concrete modification point.
+- After the rewrite round, decide `ready` or `revise`.
+- Issue a focused rewrite brief every time the verdict is `revise`.
 
 Partner Reviewer must not:
 
 - Give vague feedback.
+- Fully accept an initial draft on the first pass.
 - Approve a module with hidden evidence gaps.
 - Expand scope during review.
 

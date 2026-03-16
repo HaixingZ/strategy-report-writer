@@ -13,7 +13,7 @@ Use this skill to run a simplified report workflow that borrows RIS discipline w
 2. Produce `Storyline Packet` first and stop. Do not write report body before the user confirms it.
 3. After storyline approval, produce `Module Confirmation` and stop. Modules may refine or trim sections, but must not silently change thesis or narrative arc.
 4. Assign one domain expert per confirmed module, with a default cap of 4 experts.
-5. Have each expert deliver judgment, key findings, evidence gaps, and a module draft. Have Partner review each module with `ready` or `revise`. Allow at most one rewrite round per module.
+5. Have each expert deliver judgment, key findings, evidence gaps, and a module draft. Have Partner review each module with `ready` or `revise`, but never fully accept the first draft. The first review must include concrete modification feedback and a rewrite brief. Allow at most one rewrite round per module.
 6. After all modules are `ready`, produce `Final Delivery` and append 1-3 Nano Banana prompts based on the finished report.
 
 ## Workflow
@@ -50,11 +50,13 @@ Use this skill to run a simplified report workflow that borrows RIS discipline w
 - Use [references/style-profile.md](references/style-profile.md) as the generic fallback only when no preset fits or when the user asks for a more neutral default strategy-report voice.
 - Treat every preset as a reference profile, not a rigid template.
 - Let user-supplied style rules or sample text override the selected preset and the default profile.
+- Enforce system-level banned sentence formulas such as `不是……而是……` and close variants even when the user asks for another preset.
 - Never let style imitation override accuracy, evidence quality, or clarity.
 
 ### 6. Finalize the report
 
 - Emit `Partner Review` during revision loops and `Final Delivery` only after all confirmed modules pass review.
+- Never mark an initial module draft as fully accepted. The first `Partner Review` must surface at least one concrete change request.
 - Add Nano Banana prompts only in `Final Delivery`, never in storyline or module confirmation stages.
 
 ## Guardrails
@@ -62,6 +64,8 @@ Use this skill to run a simplified report workflow that borrows RIS discipline w
 - Do not depend on RIS CLI, `run` directories, `claim_ledger.json`, `metrics.json`, or `module_reviews.json`.
 - Do not write the full report before storyline confirmation.
 - Do not start module experts before module confirmation.
+- Do not use `不是……而是……` or close rhetorical variants anywhere in the report.
+- Do not let Partner fully accept an initial module draft without a revision pass.
 - Do not fabricate evidence, numbers, or certainty. State assumptions, boundary conditions, and evidence gaps explicitly.
 - Do not emit RIS-style JSON artifacts. Keep all public outputs as lightweight Markdown.
 

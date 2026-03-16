@@ -14,6 +14,15 @@ Apply style constraints in this order:
 
 If two style rules conflict, keep the higher-priority rule and drop the lower one.
 
+## Global banned patterns
+
+These sentence-pattern bans apply across every preset and fallback profile:
+
+- Never use `不是……而是……`
+- Never use close variants that create the same rhetorical turn, such as `并非……而是……`, `不是在……而是在……`, or similar false-binary contrast formulas
+
+Treat this as a system-level writing constraint, not a preset quirk.
+
 ## Default preset
 
 Unless the user asks for another style in the current turn, load [style-presets/analytical-operator.md](style-presets/analytical-operator.md) as the default preset.
@@ -38,6 +47,8 @@ Typical override dimensions:
 - Allowed or banned sentence patterns
 - Punctuation quirks
 
+Users may add more bans, but they may not override the global banned patterns above.
+
 Only change the dimensions the user actually touched.
 
 ## Swap-friendly design
@@ -57,3 +68,4 @@ To add or replace a style later, create or edit a preset file in `references/sty
 - Did you preserve any explicit format constraints from the current turn
 - Did you avoid leaking house-style quirks into outputs that asked for a different tone
 - Did you keep unsupported claims marked as `Assumption` or `Evidence Gap`
+- Did you remove `不是……而是……` and close variants even if another style source used them

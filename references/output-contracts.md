@@ -73,10 +73,10 @@ Field guidance:
 
 Field guidance:
 
-- `Verdict`: `ready` or `revise` only.
+- `Verdict`: `ready` or `revise` only. For the first review of an initial draft, it must be `revise`.
 - `Strengths`: what already works.
-- `Gaps`: what blocks acceptance.
-- `Rewrite Brief`: concrete rewrite actions. If the module is `ready`, write `- none`.
+- `Gaps`: what blocks acceptance. On the first review, include at least one concrete revision point.
+- `Rewrite Brief`: concrete rewrite actions. On the first review, do not write `- none`.
 
 ## Artifact 4
 
