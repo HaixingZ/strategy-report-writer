@@ -1,4 +1,4 @@
 interface:
   display_name: "Strategy Report Writer"
-  short_description: "Confirm storyline first, orchestrate experts, and draft in a chosen style"
-  default_prompt: "Use $strategy-report-writer to confirm a strategy-report storyline first, then draft it in the default house style unless I specify another style."
+  short_description: "Confirm storyline first, spawn module subagents, and draft in a chosen style"
+  default_prompt: "Use $strategy-report-writer to confirm a strategy-report storyline first, then spawn one subagent per confirmed module and draft in the default house style unless I specify another style."

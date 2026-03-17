@@ -1,6 +1,6 @@
 ---
 name: strategy-report-writer
-description: Write strategy reports with a lightweight RIS-inspired workflow that confirms storyline before modules, assigns partner and domain-expert roles, reviews against a writing style, and adds Nano Banana prompts only after the final report. Use when Codex needs to turn a loose business topic into a gated, role-based report process without depending on RIS CLI or heavy traceability artifacts.
+description: Write strategy reports with a lightweight RIS-inspired workflow that confirms storyline before modules, spawns one domain-expert subagent per confirmed module, reviews against a writing style, and adds Nano Banana prompts only after the final report. Use when Codex needs to turn a loose business topic into a gated, role-based report process without depending on RIS CLI or heavy traceability artifacts.
 ---
 
 # Strategy Report Writer
@@ -12,8 +12,8 @@ Use this skill to run a simplified report workflow that borrows RIS discipline w
 1. Clarify the brief: topic, audience, purpose, time window, geography, object definition, must-cover companies or products, must-use sources, output shape, and the writing-style source.
 2. Produce `Storyline Packet` first and stop. Do not write report body before the user confirms it.
 3. After storyline approval, produce `Module Confirmation` and stop. Modules may refine or trim sections, but must not silently change thesis or narrative arc.
-4. Assign one domain expert per confirmed module, with a default cap of 4 experts.
-5. Have each expert deliver judgment, key findings, evidence gaps, and a module draft. Have Partner review each module with `ready` or `revise`, but never fully accept the first draft. The first review must include concrete modification feedback and a rewrite brief. Allow at most one rewrite round per module.
+4. Assign one domain-expert subagent per confirmed module, with a default cap of 4 experts. Once this skill is invoked, do not ask the user to restate a preference for subagents.
+5. Have each expert subagent deliver judgment, key findings, evidence gaps, and a module draft. Have Partner review each module with `ready` or `revise`, but never fully accept the first draft. The first review must include concrete modification feedback and a rewrite brief. Allow at most one rewrite round per module.
 6. After all modules are `ready`, produce `Final Delivery` and append 1-3 Nano Banana prompts based on the finished report.
 
 ## Workflow
@@ -37,11 +37,12 @@ Use this skill to run a simplified report workflow that borrows RIS discipline w
 - Keep thesis, narrative arc, and section logic stable.
 - Return to the storyline gate if module changes would alter the thesis or main structure.
 
-### 4. Run subagents or simulate them
+### 4. Run required subagents
 
 - Read [references/subagents.md](references/subagents.md).
-- Use one expert per module when subagents are available.
-- If subagents are unavailable, simulate the same roles sequentially with `[Partner]`, `[Expert: <module>]`, and `[Partner Reviewer]` labels.
+- Always spawn one expert subagent per confirmed module.
+- Once this skill is active, do not ask the user for an additional confirmation before using subagents.
+- If subagent creation is blocked by environment or policy constraints, stop and report the blocker instead of simulating the workflow inside one agent.
 
 ### 5. Apply style review
 
@@ -64,6 +65,7 @@ Use this skill to run a simplified report workflow that borrows RIS discipline w
 - Do not depend on RIS CLI, `run` directories, `claim_ledger.json`, `metrics.json`, or `module_reviews.json`.
 - Do not write the full report before storyline confirmation.
 - Do not start module experts before module confirmation.
+- Do not simulate the Partner / Expert / Reviewer workflow inside one agent when subagent creation is expected. Surface the blocker and stop instead.
 - Do not use `不是……而是……` or close rhetorical variants anywhere in the report.
 - Do not let Partner fully accept an initial module draft without a revision pass.
 - Do not fabricate evidence, numbers, or certainty. State assumptions, boundary conditions, and evidence gaps explicitly.
@@ -72,7 +74,7 @@ Use this skill to run a simplified report workflow that borrows RIS discipline w
 ## References
 
 - Read [references/workflow.md](references/workflow.md) for the fixed sequence, gate rules, and rollback rules.
-- Read [references/subagents.md](references/subagents.md) when assigning owners or simulating role-based execution.
+- Read [references/subagents.md](references/subagents.md) when assigning owners and coordinating required subagent execution.
 - Read [references/style-system.md](references/style-system.md) first when you need to choose, merge, or override prose style.
 - Read [references/style-presets/analytical-operator.md](references/style-presets/analytical-operator.md) by default when drafting or reviewing prose style.
 - Read [references/style-profile.md](references/style-profile.md) when the user wants a more neutral strategy-report voice or when no preset fits.

@@ -1,6 +1,6 @@
 # Subagents
 
-Use these roles to keep the workflow structured and auditable without RIS runtime dependencies.
+Use these roles to keep the workflow structured and auditable through real subagent execution without RIS runtime dependencies.
 
 ## Role map
 
@@ -25,7 +25,7 @@ Partner must not:
 
 ### Domain Expert
 
-Use one domain expert per confirmed module.
+Use one domain-expert subagent per confirmed module.
 
 Responsibilities:
 
@@ -41,7 +41,7 @@ Domain Expert must not:
 - Change the approved thesis.
 - Pretend unsupported claims are verified.
 
-Recommended label when simulating sequentially:
+Recommended label when presenting module ownership in text:
 
 ```text
 [Expert: <module-name>]
@@ -67,34 +67,25 @@ Partner Reviewer must not:
 - Approve a module with hidden evidence gaps.
 - Expand scope during review.
 
-Recommended label when simulating sequentially:
+Recommended label when presenting reviewer feedback in text:
 
 ```text
 [Partner Reviewer]
 ```
 
-## Execution modes
+## Execution mode
 
-### Parallel mode
+### Required subagent mode
 
-Use this when the environment supports subagents.
+Use this skill in real subagent mode by default.
 
 - Spawn one expert per module.
 - Keep the default cap at 4 experts.
 - Feed every expert the same approved storyline and active style profile.
 - Run partner review after each expert draft returns.
-
-### Sequential fallback
-
-Use this when true subagents are unavailable.
-
-- Keep the same role separation.
-- Simulate the workflow in order with explicit labels:
-  - `[Partner]`
-  - `[Expert: module-a]`
-  - `[Partner Reviewer]`
-- Preserve the same artifact format and review loop.
-- Do not collapse the flow into a single undifferentiated answer.
+- Once this skill is invoked, do not ask the user to restate a preference for subagents.
+- If subagent creation is blocked by environment or policy constraints, stop the workflow and report the blocker.
+- Do not simulate a sequential fallback inside one agent.
 
 ## Module draft contract
 

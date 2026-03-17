@@ -7,6 +7,7 @@ Use this workflow when the user wants a strategy report that keeps RIS-style che
 - Work independently of RIS CLI, run folders, and JSON traceability files.
 - Confirm storyline before modules.
 - Confirm modules before experts.
+- Use real subagents for confirmed modules instead of a single-agent role simulation.
 - Default to Chinese output unless the user asks for another language.
 - Keep evidence discipline lightweight: cite known sources, distinguish inference from evidence, and label missing support as an assumption or evidence gap.
 
@@ -22,8 +23,8 @@ Use this workflow when the user wants a strategy report that keeps RIS-style che
    Derive modules from the approved storyline. Modules may split, merge, or trim sections, but must not silently change thesis or narrative arc.
 5. Stop for module confirmation.
    Confirm selected modules, out-of-scope items, owner map, and must-answer questions before starting expert work.
-6. Assign domain experts.
-   Use one expert per confirmed module, with a default cap of 4 experts. If more than 4 modules remain, merge adjacent modules or split execution into batches.
+6. Assign domain expert subagents.
+   Spawn one expert subagent per confirmed module, with a default cap of 4 experts. Do not ask the user to re-authorize subagent use once this skill is active. If more than 4 modules remain, merge adjacent modules or split execution into batches. If subagents cannot be started, stop and report the blocker rather than simulating expert roles in one agent.
 7. Draft modules.
    Each expert owns one module end-to-end: judgment, key findings, evidence gaps, and first draft.
 8. Run partner review.
@@ -41,6 +42,7 @@ Use this workflow when the user wants a strategy report that keeps RIS-style che
 - Do not add Nano Banana prompts before `Final Delivery`.
 - Do not let Partner Reviewer fully accept an initial draft. The first review must create a real revision pass.
 - Do not hide weak support. Explicitly label `Assumption` or `Evidence Gap` when support is incomplete.
+- Do not silently collapse the workflow into one agent when subagent creation fails.
 
 ## Rollback rules
 
