@@ -34,12 +34,14 @@ Responsibilities:
 - State the module judgment first.
 - List key findings and evidence gaps.
 - Draft the module body.
+- **If a `Source Pack` was supplied in the brief, read every entry in it before drafting. Prioritize those sources as the highest-authority evidence tier. Use them directly to support claims whenever they are relevant.**
 
 Domain Expert must not:
 
 - Rewrite other modules.
 - Change the approved thesis.
 - Pretend unsupported claims are verified.
+- Contradict or silently ignore a user-supplied source. If a source conflicts with other evidence, flag the conflict explicitly as a `Source Conflict` note.
 
 Recommended label when presenting module ownership in text:
 
@@ -66,6 +68,7 @@ Partner Reviewer must not:
 - Fully accept an initial draft on the first pass.
 - Approve a module with hidden evidence gaps.
 - Expand scope during review.
+- Approve a module that ignores a relevant user-supplied source without explanation.
 
 Recommended label when presenting reviewer feedback in text:
 
@@ -81,7 +84,7 @@ Use this skill in real subagent mode by default.
 
 - Spawn one expert per module.
 - Keep the default cap at 4 experts.
-- Feed every expert the same approved storyline and active style profile.
+- Feed every expert the same approved storyline, active style profile, and `Source Pack` (if one exists).
 - Run partner review after each expert draft returns.
 - Once this skill is invoked, do not ask the user to restate a preference for subagents.
 - If subagent creation is blocked by environment or policy constraints, stop the workflow and report the blocker.

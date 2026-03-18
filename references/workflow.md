@@ -11,11 +11,13 @@ Use this workflow when the user wants a strategy report that keeps RIS-style che
 - Default to Chinese output unless the user asks for another language.
 - Keep evidence discipline lightweight: cite known sources, distinguish inference from evidence, and label missing support as an assumption or evidence gap.
 - When citing a source, always include its URL in `[来源名称](URL)` format. If the URL cannot be verified, append `（URL未确认）`. If no public URL exists, append `（无公开URL）`. Never cite a source by name alone.
+- **User-supplied sources take priority.** If the user provides a `Source Pack` (or individual URLs/documents/text) at any point before module work begins, those sources are treated as the highest-authority evidence tier. Inferences that contradict a user-supplied source must be flagged explicitly.
 
 ## Fixed sequence
 
 1. Clarify the brief.
    Gather the decision problem, audience, purpose, time window, geography, object definition, must-cover entities, must-use sources, and output shape.
+   **Optional: Source Pack ingestion.** If the user provides URLs, documents, or text excerpts as reference material, assemble them into a `Source Pack`—a flat list of `[名称](URL)` entries each with a one-line description. Attach the `Source Pack` to the confirmed brief. Do not ask the user to supply sources if they have not offered any.
 2. Produce `Storyline Packet`.
    Use the exact contract from `output-contracts.md`. Do not write report body yet.
 3. Stop for storyline confirmation.
@@ -44,6 +46,7 @@ Use this workflow when the user wants a strategy report that keeps RIS-style che
 - Do not let Partner Reviewer fully accept an initial draft. The first review must create a real revision pass.
 - Do not hide weak support. Explicitly label `Assumption` or `Evidence Gap` when support is incomplete.
 - Do not silently collapse the workflow into one agent when subagent creation fails.
+- Do not ignore or contradict a user-supplied source without explicitly flagging the conflict.
 
 ## Rollback rules
 

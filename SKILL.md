@@ -9,7 +9,7 @@ Use this skill to run a simplified report workflow that borrows RIS discipline w
 
 ## Quick Start
 
-1. Clarify the brief: topic, audience, purpose, time window, geography, object definition, must-cover companies or products, must-use sources, output shape, and the writing-style source.
+1. Clarify the brief: topic, audience, purpose, time window, geography, object definition, must-cover companies or products, must-use sources, output shape, and the writing-style source. If the user supplies reference sources at any point before module work begins, collect them into a `Source Pack` (see Workflow § 1).
 2. Produce `Storyline Packet` first and stop. Do not write report body before the user confirms it.
 3. After storyline approval, produce `Module Confirmation` and stop. Modules may refine or trim sections, but must not silently change thesis or narrative arc.
 4. Assign one domain-expert subagent per confirmed module, with a default cap of 4 experts. Once this skill is invoked, do not ask the user to restate a preference for subagents.
@@ -24,6 +24,7 @@ Use this skill to run a simplified report workflow that borrows RIS discipline w
 - Default to Chinese output unless the user asks otherwise.
 - Keep evidence discipline lightweight: cite named sources when available, separate evidence from inference, and always include the source URL in `[来源名称](URL)` format. If the URL cannot be verified, append `（URL未确认）`. If no public URL exists, append `（无公开URL）`.
 - Identify the active writing style in this order: explicit current-turn instruction, user-supplied sample text, explicit alternate preset, then the default house preset.
+- **Optional: collect user-supplied sources.** If the user provides URLs, documents, or text excerpts as reference material at any point before module work begins, assemble them into a `Source Pack` and attach it to the brief. A `Source Pack` is a flat list of entries in `[name](URL)` format (or `name（无公开URL）` for non-public items), each with a one-line description of what the source covers. Do not ask the user to supply sources if they have not offered any.
 
 ### 2. Lock storyline first
 
@@ -69,6 +70,7 @@ Use this skill to run a simplified report workflow that borrows RIS discipline w
 - Do not use `不是……而是……` or close rhetorical variants anywhere in the report.
 - Do not let Partner fully accept an initial module draft without a revision pass.
 - Do not fabricate evidence, numbers, or certainty. State assumptions, boundary conditions, and evidence gaps explicitly.
+- Do not contradict or ignore a user-supplied source without flagging the conflict explicitly.
 - Do not cite a source by name alone. Always attach its URL in `[来源名称](URL)` format. If the URL cannot be verified, append `（URL未确认）`. If no public URL exists, append `（无公开URL）`.
 - Do not emit RIS-style JSON artifacts. Keep all public outputs as lightweight Markdown.
 
