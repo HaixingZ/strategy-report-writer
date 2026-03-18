@@ -17,7 +17,7 @@ Use this workflow when the user wants a strategy report that keeps RIS-style che
 
 1. Clarify the brief.
    Gather the decision problem, audience, purpose, time window, geography, object definition, must-cover entities, must-use sources, and output shape.
-   **Optional: Source Pack ingestion.** If the user provides URLs, documents, or text excerpts as reference material, assemble them into a `Source Pack`—a flat list of `[名称](URL)` entries each with a one-line description. Attach the `Source Pack` to the confirmed brief. Do not ask the user to supply sources if they have not offered any.
+   **Ask once for sources.** At the end of brief clarification, ask the user once: "您是否有参考来源（URL、文档或文本摘录）希望纳入报告？" If the user provides any, assemble them into a `Source Pack`—a flat list of `[名称](URL)` entries each with a one-line description—and attach it to the confirmed brief. If the user declines or provides nothing, proceed without a Source Pack. Do not ask a second time.
 2. Produce `Storyline Packet`.
    Use the exact contract from `output-contracts.md`. Do not write report body yet.
 3. Stop for storyline confirmation.
