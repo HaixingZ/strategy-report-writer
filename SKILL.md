@@ -22,7 +22,7 @@ Use this skill to run a simplified report workflow that borrows RIS discipline w
 
 - Ask only for missing product intent and boundary details.
 - Default to Chinese output unless the user asks otherwise.
-- Keep evidence discipline lightweight: cite named sources when available and separate evidence from inference.
+- Keep evidence discipline lightweight: cite named sources when available, separate evidence from inference, and always include the source URL in `[来源名称](URL)` format. If the URL cannot be verified, append `（URL未确认）`. If no public URL exists, append `（无公开URL）`.
 - Identify the active writing style in this order: explicit current-turn instruction, user-supplied sample text, explicit alternate preset, then the default house preset.
 
 ### 2. Lock storyline first
@@ -69,6 +69,7 @@ Use this skill to run a simplified report workflow that borrows RIS discipline w
 - Do not use `不是……而是……` or close rhetorical variants anywhere in the report.
 - Do not let Partner fully accept an initial module draft without a revision pass.
 - Do not fabricate evidence, numbers, or certainty. State assumptions, boundary conditions, and evidence gaps explicitly.
+- Do not cite a source by name alone. Always attach its URL in `[来源名称](URL)` format. If the URL cannot be verified, append `（URL未确认）`. If no public URL exists, append `（无公开URL）`.
 - Do not emit RIS-style JSON artifacts. Keep all public outputs as lightweight Markdown.
 
 ## References

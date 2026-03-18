@@ -97,3 +97,21 @@ Each expert draft should cover these four elements before review:
 4. Module draft body
 
 Keep these inside the expert workstream. The public artifact headings still come from `output-contracts.md`.
+
+## Citation format
+
+When citing any data source, report, article, or public document in a module draft, always include the URL in Markdown link format:
+
+```
+数据来源：[来源名称](URL)
+```
+
+Examples:
+- 数据来源：[中国汽车流通协会（CADA）](https://www.cada.org.cn)
+- 数据来源：[CADA《2024年度中国汽车流通行业二手车经销商百强排行榜分析报告》](https://www.cada.org.cn/info/xxxx)
+
+Rules:
+- If the URL is known or searchable, include it.
+- If the URL cannot be verified, note it as `（URL未确认）` after the link.
+- Never cite a source by name alone. A bare name without a URL must not appear in a `数据来源` line.
+- If a source has no publicly accessible URL (e.g., internal document or subscription-only), write `（无公开URL）` in place of the URL.

@@ -10,6 +10,7 @@ Use this workflow when the user wants a strategy report that keeps RIS-style che
 - Use real subagents for confirmed modules instead of a single-agent role simulation.
 - Default to Chinese output unless the user asks for another language.
 - Keep evidence discipline lightweight: cite known sources, distinguish inference from evidence, and label missing support as an assumption or evidence gap.
+- When citing a source, always include its URL in `[来源名称](URL)` format. If the URL cannot be verified, append `（URL未确认）`. If no public URL exists, append `（无公开URL）`. Never cite a source by name alone.
 
 ## Fixed sequence
 
