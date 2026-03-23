@@ -34,8 +34,10 @@ Use this workflow when the user wants a strategy report that keeps RIS-style che
    Review each module against the approved storyline and the active style profile. Use `ready` or `revise` only. The first review of an initial draft must be `revise` and must include at least one concrete modification request.
 9. Allow one rewrite round.
    Send the module back to the same expert once with the concrete rewrite brief from the first review.
-10. Finalize the report.
-    Produce `Final Delivery` only after all confirmed modules are `ready`. Append 1-3 Nano Banana prompts based on the completed report.
+10. Compile the Evidence Gap Register.
+    Before producing `Final Delivery`, collect all material evidence gaps surfaced by expert subagents across all modules. Consolidate them into a single `Evidence Gap Register` using the standard gap template (Gap / Why it matters / What is needed / Who can provide it / Impact on current report). Prioritize gaps that limit confidence in the report's main thesis. Omit gaps already resolved during the module phase.
+11. Finalize the report.
+    Produce `Final Delivery` only after all confirmed modules are `ready`. The `Final Delivery` includes the Evidence Gap Register for analyst reference when scoping expert interviews. Append 1-3 Nano Banana prompts based on the completed report.
 
 ## Gate rules
 
@@ -43,6 +45,7 @@ Use this workflow when the user wants a strategy report that keeps RIS-style che
 - Do not start any expert before module confirmation.
 - Do not let module changes quietly rewrite the thesis.
 - Do not add Nano Banana prompts before `Final Delivery`.
+- Do not omit the Evidence Gap Register from `Final Delivery`. If no material gaps remain, write `- 无重大证据缺口`.
 - Do not let Partner Reviewer fully accept an initial draft. The first review must create a real revision pass.
 - Do not hide weak support. Explicitly label `Assumption` or `Evidence Gap` when support is incomplete.
 - Do not silently collapse the workflow into one agent when subagent creation fails.
