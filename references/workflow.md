@@ -38,6 +38,7 @@ Use this workflow when the user wants a strategy report that keeps RIS-style che
     Before producing `Final Delivery`, collect all material evidence gaps surfaced by expert subagents across all modules. Consolidate them into a single `Evidence Gap Register` using the standard gap template (Gap / Why it matters / What is needed / Who can provide it / Impact on current report). Prioritize gaps that limit confidence in the report's main thesis. Omit gaps already resolved during the module phase.
 11. Finalize the report.
     Produce `Final Delivery` only after all confirmed modules are `ready`. The `Final Delivery` includes the Evidence Gap Register for analyst reference when scoping expert interviews. Append 1-3 Nano Banana prompts based on the completed report.
+    **Immediately after emitting `Final Delivery` in chat, write the complete `Final Delivery` content to a `.md` file in the current working directory.** Name the file using the pattern `report-YYYYMMDD-{title-slug}.md` where `YYYYMMDD` is today's date and `{title-slug}` is the report title lowercased with spaces replaced by hyphens (e.g., `report-20260323-china-ev-market.md`). Do not ask the user for confirmation before writing the file. Do not skip this step.
 
 ## Gate rules
 
@@ -46,6 +47,7 @@ Use this workflow when the user wants a strategy report that keeps RIS-style che
 - Do not let module changes quietly rewrite the thesis.
 - Do not add Nano Banana prompts before `Final Delivery`.
 - Do not omit the Evidence Gap Register from `Final Delivery`. If no material gaps remain, write `- 无重大证据缺口`.
+- Do not skip writing the `.md` file after `Final Delivery`. Writing the file is part of the delivery step, not an optional action.
 - Do not let Partner Reviewer fully accept an initial draft. The first review must create a real revision pass.
 - Do not hide weak support. Explicitly label `Assumption` or `Evidence Gap` when support is incomplete.
 - Do not silently collapse the workflow into one agent when subagent creation fails.
