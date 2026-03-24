@@ -89,6 +89,8 @@ Field guidance:
 
 ## Partner Acceptance Note
 
+## Evidence Gap Register
+
 ## Nano Banana Prompts
 ```
 
@@ -97,6 +99,19 @@ Field guidance:
 - `Executive Summary`: short management summary for fast reading.
 - `Final Report`: the integrated report body with all approved modules.
 - `Partner Acceptance Note`: why the report is acceptable, what assumptions remain, and where caution is still needed.
+- `Evidence Gap Register`: a consolidated list of all material evidence gaps identified across modules, formatted for analyst use when scoping expert interviews. Use the standard gap template for each item:
+
+```markdown
+### Gap N
+- Gap:
+- Why it matters:
+- What is needed:
+- Who can provide it:
+- Impact on current report:
+```
+
+  Include only gaps that materially limit confidence in the report's conclusions. Omit gaps already resolved during the module phase. Each "Who can provide it" entry should name the type of expert, function, or data source an analyst would realistically approach (e.g., 一线销售负责人、产品运营、行业分析师、内部财务数据). If no material gaps remain, write `- 无重大证据缺口`.
+
 - `Nano Banana Prompts`: 1-3 prompts only, chosen from the finished report.
 
 Use this structure for each Nano Banana prompt:

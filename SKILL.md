@@ -9,12 +9,12 @@ Use this skill to run a simplified report workflow that borrows RIS discipline w
 
 ## Quick Start
 
-1. Clarify the brief: topic, audience, purpose, time window, geography, object definition, must-cover companies or products, must-use sources, output shape, and the writing-style source.
+1. Clarify the brief: topic, audience, purpose, time window, geography, object definition, must-cover companies or products, must-use sources, output shape, and the writing-style source. At the end of brief clarification, ask the user once whether they have reference sources to provide; if yes, collect them into a `Source Pack` (see Workflow § 1).
 2. Produce `Storyline Packet` first and stop. Do not write report body before the user confirms it.
 3. After storyline approval, produce `Module Confirmation` and stop. Modules may refine or trim sections, but must not silently change thesis or narrative arc.
 4. Assign one domain-expert subagent per confirmed module, with a default cap of 4 experts. Once this skill is invoked, do not ask the user to restate a preference for subagents.
 5. Have each expert subagent deliver judgment, key findings, evidence gaps, and a module draft. Have Partner review each module with `ready` or `revise`, but never fully accept the first draft. The first review must include concrete modification feedback and a rewrite brief. Allow at most one rewrite round per module.
-6. After all modules are `ready`, produce `Final Delivery` and append 1-3 Nano Banana prompts based on the finished report.
+6. After all modules are `ready`, consolidate all material evidence gaps from expert subagents into an `Evidence Gap Register` (one entry per gap, with: Gap / Why it matters / What is needed / Who can provide it / Impact on current report). Then produce `Final Delivery` with the register included as an appendix for analysts to use when scoping expert interviews. Append 1-3 Nano Banana prompts based on the finished report. **Immediately after emitting `Final Delivery` in chat, write the full delivery to a `.md` file in the current working directory** using the naming pattern `report-YYYYMMDD-{title-slug}.md`. Do not wait for the user to ask.
 
 ## Workflow
 
@@ -22,8 +22,9 @@ Use this skill to run a simplified report workflow that borrows RIS discipline w
 
 - Ask only for missing product intent and boundary details.
 - Default to Chinese output unless the user asks otherwise.
-- Keep evidence discipline lightweight: cite named sources when available and separate evidence from inference.
+- Keep evidence discipline lightweight: cite named sources when available, separate evidence from inference, and always include the source URL in `[来源名称](URL)` format. If the URL cannot be verified, append `（URL未确认）`. If no public URL exists, append `（无公开URL）`.
 - Identify the active writing style in this order: explicit current-turn instruction, user-supplied sample text, explicit alternate preset, then the default house preset.
+- **Ask once for sources.** At the end of brief clarification, ask the user once: "您是否有参考来源（URL、文档或文本摘录）希望纳入报告？" If the user provides any, assemble them into a `Source Pack`—a flat list of `[name](URL)` entries (or `name（无公开URL）` for non-public items) each with a one-line description of what the source covers—and attach it to the brief. If the user declines or provides nothing, proceed without a Source Pack. Do not ask a second time.
 
 ### 2. Lock storyline first
 
@@ -69,6 +70,10 @@ Use this skill to run a simplified report workflow that borrows RIS discipline w
 - Do not use `不是……而是……` or close rhetorical variants anywhere in the report.
 - Do not let Partner fully accept an initial module draft without a revision pass.
 - Do not fabricate evidence, numbers, or certainty. State assumptions, boundary conditions, and evidence gaps explicitly.
+- Do not omit the Evidence Gap Register from `Final Delivery`. If no material gaps remain, write `- 无重大证据缺口`.
+- Do not skip writing the `.md` file after `Final Delivery`. This is a required delivery action, not an optional step. Write immediately after emitting the final output in chat, without waiting for user confirmation.
+- Do not contradict or ignore a user-supplied source without flagging the conflict explicitly.
+- Do not cite a source by name alone. Always attach its URL in `[来源名称](URL)` format. If the URL cannot be verified, append `（URL未确认）`. If no public URL exists, append `（无公开URL）`.
 - Do not emit RIS-style JSON artifacts. Keep all public outputs as lightweight Markdown.
 
 ## References

@@ -10,11 +10,14 @@ Use this workflow when the user wants a strategy report that keeps RIS-style che
 - Use real subagents for confirmed modules instead of a single-agent role simulation.
 - Default to Chinese output unless the user asks for another language.
 - Keep evidence discipline lightweight: cite known sources, distinguish inference from evidence, and label missing support as an assumption or evidence gap.
+- When citing a source, always include its URL in `[来源名称](URL)` format. If the URL cannot be verified, append `（URL未确认）`. If no public URL exists, append `（无公开URL）`. Never cite a source by name alone.
+- **User-supplied sources take priority.** If the user provides a `Source Pack` (or individual URLs/documents/text) at any point before module work begins, those sources are treated as the highest-authority evidence tier. Inferences that contradict a user-supplied source must be flagged explicitly.
 
 ## Fixed sequence
 
 1. Clarify the brief.
    Gather the decision problem, audience, purpose, time window, geography, object definition, must-cover entities, must-use sources, and output shape.
+   **Ask once for sources.** At the end of brief clarification, ask the user once: "您是否有参考来源（URL、文档或文本摘录）希望纳入报告？" If the user provides any, assemble them into a `Source Pack`—a flat list of `[名称](URL)` entries each with a one-line description—and attach it to the confirmed brief. If the user declines or provides nothing, proceed without a Source Pack. Do not ask a second time.
 2. Produce `Storyline Packet`.
    Use the exact contract from `output-contracts.md`. Do not write report body yet.
 3. Stop for storyline confirmation.
@@ -31,8 +34,11 @@ Use this workflow when the user wants a strategy report that keeps RIS-style che
    Review each module against the approved storyline and the active style profile. Use `ready` or `revise` only. The first review of an initial draft must be `revise` and must include at least one concrete modification request.
 9. Allow one rewrite round.
    Send the module back to the same expert once with the concrete rewrite brief from the first review.
-10. Finalize the report.
-    Produce `Final Delivery` only after all confirmed modules are `ready`. Append 1-3 Nano Banana prompts based on the completed report.
+10. Compile the Evidence Gap Register.
+    Before producing `Final Delivery`, collect all material evidence gaps surfaced by expert subagents across all modules. Consolidate them into a single `Evidence Gap Register` using the standard gap template (Gap / Why it matters / What is needed / Who can provide it / Impact on current report). Prioritize gaps that limit confidence in the report's main thesis. Omit gaps already resolved during the module phase.
+11. Finalize the report.
+    Produce `Final Delivery` only after all confirmed modules are `ready`. The `Final Delivery` includes the Evidence Gap Register for analyst reference when scoping expert interviews. Append 1-3 Nano Banana prompts based on the completed report.
+    **Immediately after emitting `Final Delivery` in chat, write the complete `Final Delivery` content to a `.md` file in the current working directory.** Name the file using the pattern `report-YYYYMMDD-{title-slug}.md` where `YYYYMMDD` is today's date and `{title-slug}` is the report title lowercased with spaces replaced by hyphens (e.g., `report-20260323-china-ev-market.md`). Do not ask the user for confirmation before writing the file. Do not skip this step.
 
 ## Gate rules
 
@@ -40,9 +46,12 @@ Use this workflow when the user wants a strategy report that keeps RIS-style che
 - Do not start any expert before module confirmation.
 - Do not let module changes quietly rewrite the thesis.
 - Do not add Nano Banana prompts before `Final Delivery`.
+- Do not omit the Evidence Gap Register from `Final Delivery`. If no material gaps remain, write `- 无重大证据缺口`.
+- Do not skip writing the `.md` file after `Final Delivery`. Writing the file is part of the delivery step, not an optional action.
 - Do not let Partner Reviewer fully accept an initial draft. The first review must create a real revision pass.
 - Do not hide weak support. Explicitly label `Assumption` or `Evidence Gap` when support is incomplete.
 - Do not silently collapse the workflow into one agent when subagent creation fails.
+- Do not ignore or contradict a user-supplied source without explicitly flagging the conflict.
 
 ## Rollback rules
 
