@@ -1,120 +1,113 @@
 # Subagents
 
-Use these roles to keep the workflow structured and auditable through real subagent execution without RIS runtime dependencies.
+Use these roles to keep the workflow structured, auditable, and source-aware.
 
 ## Role map
 
-### Partner
+### Planner
 
-Use Partner for pre-writing structure and final synthesis.
+Use Planner for pre-writing structure, module contracts, and final synthesis.
 
 Responsibilities:
 
 - Translate the brief into a sharp report thesis.
 - Produce `Storyline Packet`.
 - Produce `Module Confirmation`.
-- Decide module ownership.
+- Produce one approved `Module Contract` per module before drafting begins.
+- Carry forward any approved `Source Pack` into module execution.
+- Decide module ownership and batching.
 - Consolidate the final report after all modules pass review.
 - Write the final acceptance note.
+- Consolidate the final `Evidence Gap Register`.
 
-Partner must not:
+Planner must not:
 
 - Draft the whole report before the storyline and modules are confirmed.
 - Quietly change thesis or boundaries after confirmation.
-- Skip expert ownership for confirmed modules.
+- Skip evaluator review of module contracts.
+- Skip Executor ownership for confirmed modules.
 
-### Domain Expert
+### Executor
 
-Use one domain-expert subagent per confirmed module.
+Use one Executor per approved module.
 
 Responsibilities:
 
 - Own one module end-to-end.
-- Research the module question set.
+- Research the module question set using the approved module contract.
+- Cover user-provided `Source Pack` items before expanding to lower-priority public evidence.
 - State the module judgment first.
 - List key findings and evidence gaps.
+- State public evidence coverage before claiming completeness.
+- Use Markdown links for public citations instead of bare source names.
 - Draft the module body.
-- **If a `Source Pack` was supplied in the brief, read every entry in it before drafting. Prioritize those sources as the highest-authority evidence tier. Use them directly to support claims whenever they are relevant.**
 
-Domain Expert must not:
+Executor must not:
 
 - Rewrite other modules.
 - Change the approved thesis.
+- Ignore accessible public sources that fit the approved scope.
 - Pretend unsupported claims are verified.
-- Contradict or silently ignore a user-supplied source. If a source conflicts with other evidence, flag the conflict explicitly as a `Source Conflict` note.
 
-Recommended label when presenting module ownership in text:
+### Evaluator
 
-```text
-[Expert: <module-name>]
-```
-
-### Partner Reviewer
-
-Use Partner Reviewer for module-level quality control.
+Use Evaluator for contract-level and module-level quality control.
 
 Responsibilities:
 
-- Review one module at a time.
-- Check alignment with approved storyline.
+- Review one module contract or one module draft at a time.
+- Check alignment with the approved storyline and approved module contract.
+- Check whether accessible public sources were reasonably covered for the approved scope.
+- Check whether `Source Pack` items were used or explicitly reconciled.
+- Distinguish acceptable evidence limits from missed public research.
+- Check whether public citations are written as Markdown links.
 - Check fit with the active style profile.
-- On the first pass, always decide `revise` and provide at least one concrete modification point.
-- After the rewrite round, decide `ready` or `revise`.
-- Issue a focused rewrite brief every time the verdict is `revise`.
+- Decide `ready` or `revise`.
+- Issue a focused rewrite brief when needed.
 
-Partner Reviewer must not:
+Evaluator must not:
 
 - Give vague feedback.
-- Fully accept an initial draft on the first pass.
+- Fail a module only because some needed information is private, interview-only, or proprietary.
 - Approve a module with hidden evidence gaps.
 - Expand scope during review.
-- Approve a module that ignores a relevant user-supplied source without explanation.
 
-Recommended label when presenting reviewer feedback in text:
+## Evaluation standard
 
-```text
-[Partner Reviewer]
-```
+Use these checks during evaluator review:
 
-## Execution mode
+- `Thesis and scope alignment`: the draft stays inside the approved thesis, module boundaries, and question set.
+- `Public-source coverage`: the draft uses the accessible public evidence that could reasonably be found for this scope and time budget.
+- `Source-pack handling`: user-provided sources were covered first or any conflict was flagged explicitly.
+- `Evidence-gap disclosure`: missing private or interview-only support is labeled clearly instead of being smuggled in as fact.
+- `Analytical clarity`: the judgment is explicit and the logic chain is readable.
+- `Citation integrity`: public sources are cited with Markdown links, not bare names.
+- `Style fit`: the prose matches the selected style profile without overriding accuracy.
+
+Fail the draft when accessible public sources were skipped, `Source Pack` items were ignored, certainty exceeds support, citations lack links, or evidence gaps were hidden. Do not fail the draft only because some answers require expert interviews or proprietary data.
+
+## Execution modes
 
 ### Required subagent mode
 
-Use this skill in real subagent mode by default.
+- Spawn one Executor per module.
+- Keep the default cap at 4 Executors.
+- Feed every Executor the same approved storyline, approved module contract, and active style profile.
+- Run Evaluator once before drafting begins and again after each module draft returns.
 
-- Spawn one expert per module.
-- Keep the default cap at 4 experts.
-- Feed every expert the same approved storyline, active style profile, and `Source Pack` (if one exists).
-- Run partner review after each expert draft returns.
-- Once this skill is invoked, do not ask the user to restate a preference for subagents.
-- If subagent creation is blocked by environment or policy constraints, stop the workflow and report the blocker.
-- Do not simulate a sequential fallback inside one agent.
+### Blocked mode
+
+- If the environment does not support subagents, stop and report the blocker.
+- Do not simulate Planner / Executor / Evaluator sequentially inside one agent.
 
 ## Module draft contract
 
-Each expert draft should cover these four elements before review:
+Each Executor draft should cover these five elements before review:
 
 1. Module judgment
 2. Key findings
-3. Evidence gaps
-4. Module draft body
+3. Public evidence coverage
+4. Evidence gaps
+5. Module draft body
 
-Keep these inside the expert workstream. The public artifact headings still come from `output-contracts.md`.
-
-## Citation format
-
-When citing any data source, report, article, or public document in a module draft, always include the URL in Markdown link format:
-
-```
-数据来源：[来源名称](URL)
-```
-
-Examples:
-- 数据来源：[中国汽车流通协会（CADA）](https://www.cada.org.cn)
-- 数据来源：[CADA《2024年度中国汽车流通行业二手车经销商百强排行榜分析报告》](https://www.cada.org.cn/info/xxxx)
-
-Rules:
-- If the URL is known or searchable, include it.
-- If the URL cannot be verified, note it as `（URL未确认）` after the link.
-- Never cite a source by name alone. A bare name without a URL must not appear in a `数据来源` line.
-- If a source has no publicly accessible URL (e.g., internal document or subscription-only), write `（无公开URL）` in place of the URL.
+Keep these inside the Executor workstream. The public artifact headings still come from `output-contracts.md`.

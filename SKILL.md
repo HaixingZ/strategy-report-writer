@@ -1,86 +1,56 @@
 ---
 name: strategy-report-writer
-description: Write strategy reports with a lightweight RIS-inspired workflow that confirms storyline before modules, spawns one domain-expert subagent per confirmed module, reviews against a writing style, and adds Nano Banana prompts only after the final report. Use when Codex needs to turn a loose business topic into a gated, role-based report process without depending on RIS CLI or heavy traceability artifacts.
+description: Use when the user wants a strategy report, market study, industry analysis, or decision memo from a loose brief and the task needs thesis clarification, modular analysis, linked citations, source-pack handling, and explicit evidence-gap tracking.
 ---
 
 # Strategy Report Writer
 
-Use this skill to run a simplified report workflow that borrows RIS discipline without depending on RIS CLI, run directories, claim ledgers, or metrics files.
+Use this skill to run a gated strategy-report workflow with staged approvals, modular drafting, and explicit evidence discipline.
 
-## Quick Start
+## When to Use
 
-1. Clarify the brief: topic, audience, purpose, time window, geography, object definition, must-cover companies or products, must-use sources, output shape, and the writing-style source. At the end of brief clarification, ask the user once whether they have reference sources to provide; if yes, collect them into a `Source Pack` (see Workflow § 1).
-2. Produce `Storyline Packet` first and stop. Do not write report body before the user confirms it.
-3. After storyline approval, produce `Module Confirmation` and stop. Modules may refine or trim sections, but must not silently change thesis or narrative arc.
-4. Assign one domain-expert subagent per confirmed module, with a default cap of 4 experts. Once this skill is invoked, do not ask the user to restate a preference for subagents.
-5. Have each expert subagent deliver judgment, key findings, evidence gaps, and a module draft. Have Partner review each module with `ready` or `revise`, but never fully accept the first draft. The first review must include concrete modification feedback and a rewrite brief. Allow at most one rewrite round per module.
-6. After all modules are `ready`, consolidate all material evidence gaps from expert subagents into an `Evidence Gap Register` (one entry per gap, with: Gap / Why it matters / What is needed / Who can provide it / Impact on current report). Then produce `Final Delivery` with the register included as an appendix for analysts to use when scoping expert interviews. Append 1-3 Nano Banana prompts based on the finished report. **Immediately after emitting `Final Delivery` in chat, write the full delivery to a `.md` file in the current working directory** using the naming pattern `report-YYYYMMDD-{title-slug}.md`. Do not wait for the user to ask.
+- The brief is still loose and the thesis needs to be sharpened before drafting.
+- The report needs staged approval of storyline and modules.
+- Different sections need separate owners or research angles.
+- Public evidence quality varies across modules and missing support must stay visible.
+- The user wants a strategy-report workflow, not a one-pass generic essay.
 
-## Workflow
+## Core Workflow
 
-### 1. Clarify the brief
+1. Clarify only missing boundary details such as audience, decision problem, time window, geography, must-cover entities, and output shape. Ask once whether the user has reference sources and preserve them as a `Source Pack` if provided.
+2. Produce `Storyline Packet` and stop for approval before any report drafting.
+3. Produce `Module Confirmation` and stop again if the storyline is approved.
+4. Produce one `Module Contract` per module and have Evaluator review contracts before drafting starts.
+5. Spawn one Executor per approved module. If subagents are blocked, stop and report the blocker.
+6. Review every module draft with Evaluator and allow at most one rewrite round per module.
+7. Produce `Final Delivery` only after all modules are `ready`. `Final Report` must be the complete integrated research report, include an `Evidence Gap Register`, then append Nano Banana prompts.
+8. Write every public artifact, every approved module draft, and `Final Delivery` to Markdown files in the current working directory.
 
-- Ask only for missing product intent and boundary details.
-- Default to Chinese output unless the user asks otherwise.
-- Keep evidence discipline lightweight: cite named sources when available, separate evidence from inference, and always include the source URL in `[来源名称](URL)` format. If the URL cannot be verified, append `（URL未确认）`. If no public URL exists, append `（无公开URL）`.
-- Identify the active writing style in this order: explicit current-turn instruction, user-supplied sample text, explicit alternate preset, then the default house preset.
-- **Ask once for sources.** At the end of brief clarification, ask the user once: "您是否有参考来源（URL、文档或文本摘录）希望纳入报告？" If the user provides any, assemble them into a `Source Pack`—a flat list of `[name](URL)` entries (or `name（无公开URL）` for non-public items) each with a one-line description of what the source covers—and attach it to the brief. If the user declines or provides nothing, proceed without a Source Pack. Do not ask a second time.
+## Evidence Standard
 
-### 2. Lock storyline first
-
-- Read [references/workflow.md](references/workflow.md) and [references/output-contracts.md](references/output-contracts.md).
-- Write `Storyline Packet` with the exact heading and field order from the output contract.
-- Stop after the packet and wait for confirmation or edits.
-
-### 3. Confirm modules second
-
-- After storyline approval, propose or refine modules from the approved sections.
-- Keep thesis, narrative arc, and section logic stable.
-- Return to the storyline gate if module changes would alter the thesis or main structure.
-
-### 4. Run required subagents
-
-- Read [references/subagents.md](references/subagents.md).
-- Always spawn one expert subagent per confirmed module.
-- Once this skill is active, do not ask the user for an additional confirmation before using subagents.
-- If subagent creation is blocked by environment or policy constraints, stop and report the blocker instead of simulating the workflow inside one agent.
-
-### 5. Apply style review
-
-- Read [references/style-system.md](references/style-system.md) before choosing any style guidance.
-- Use [references/style-presets/analytical-operator.md](references/style-presets/analytical-operator.md) as the default preset.
-- Use [references/style-profile.md](references/style-profile.md) as the generic fallback only when no preset fits or when the user asks for a more neutral default strategy-report voice.
-- Treat every preset as a reference profile, not a rigid template.
-- Let user-supplied style rules or sample text override the selected preset and the default profile.
-- Enforce system-level banned sentence formulas such as `不是……而是……` and close variants even when the user asks for another preset.
-- Never let style imitation override accuracy, evidence quality, or clarity.
-
-### 6. Finalize the report
-
-- Emit `Partner Review` during revision loops and `Final Delivery` only after all confirmed modules pass review.
-- Never mark an initial module draft as fully accepted. The first `Partner Review` must surface at least one concrete change request.
-- Add Nano Banana prompts only in `Final Delivery`, never in storyline or module confirmation stages.
+- Treat sufficiency as reasonable coverage of accessible public sources for the approved scope and time available.
+- Treat a user-provided `Source Pack` as the highest-authority evidence tier inside the approved scope.
+- When a public source is cited, cite it as a Markdown link in `[来源名称](URL)` format. Do not cite public sources by name alone.
+- If support likely requires interviews, proprietary data, or other non-public inputs, mark the missing support as `Evidence Gap`.
+- Fail drafts that skip accessible public evidence, hide evidence gaps, or overstate certainty.
 
 ## Guardrails
 
-- Do not depend on RIS CLI, `run` directories, `claim_ledger.json`, `metrics.json`, or `module_reviews.json`.
-- Do not write the full report before storyline confirmation.
-- Do not start module experts before module confirmation.
-- Do not simulate the Partner / Expert / Reviewer workflow inside one agent when subagent creation is expected. Surface the blocker and stop instead.
-- Do not use `不是……而是……` or close rhetorical variants anywhere in the report.
-- Do not let Partner fully accept an initial module draft without a revision pass.
-- Do not fabricate evidence, numbers, or certainty. State assumptions, boundary conditions, and evidence gaps explicitly.
-- Do not omit the Evidence Gap Register from `Final Delivery`. If no material gaps remain, write `- 无重大证据缺口`.
-- Do not skip writing the `.md` file after `Final Delivery`. This is a required delivery action, not an optional step. Write immediately after emitting the final output in chat, without waiting for user confirmation.
-- Do not contradict or ignore a user-supplied source without flagging the conflict explicitly.
-- Do not cite a source by name alone. Always attach its URL in `[来源名称](URL)` format. If the URL cannot be verified, append `（URL未确认）`. If no public URL exists, append `（无公开URL）`.
-- Do not emit RIS-style JSON artifacts. Keep all public outputs as lightweight Markdown.
+- No full report before storyline approval.
+- No Executor before module approval and contract approval.
+- No single-agent simulation of Planner / Executor / Evaluator when subagents are expected.
+- No single Executor rewriting the whole report outside its assigned module. If there are too many modules, merge or batch them through the workflow rules instead of collapsing ownership.
+- No public citation without a link.
+- No dropping or contradicting a user-supplied `Source Pack` without flagging the conflict explicitly.
+- No omitting the `Evidence Gap Register` from `Final Delivery`.
+- No skipping the Markdown file write for public artifacts, approved module drafts, or `Final Delivery`.
+- No fabricated evidence.
 
 ## References
 
-- Read [references/workflow.md](references/workflow.md) for the fixed sequence, gate rules, and rollback rules.
-- Read [references/subagents.md](references/subagents.md) when assigning owners and coordinating required subagent execution.
-- Read [references/style-system.md](references/style-system.md) first when you need to choose, merge, or override prose style.
-- Read [references/style-presets/analytical-operator.md](references/style-presets/analytical-operator.md) by default when drafting or reviewing prose style.
-- Read [references/style-profile.md](references/style-profile.md) when the user wants a more neutral strategy-report voice or when no preset fits.
-- Read [references/output-contracts.md](references/output-contracts.md) before emitting any of the 4 public artifacts.
+- Read [references/workflow.md](references/workflow.md) for the exact sequence, evaluator gates, and rollback rules.
+- Read [references/subagents.md](references/subagents.md) for Planner / Executor / Evaluator responsibilities.
+- Read [references/output-contracts.md](references/output-contracts.md) before emitting any public artifact.
+- Read [references/style-system.md](references/style-system.md) first when choosing or overriding prose style.
+- Read [references/style-presets/analytical-operator.md](references/style-presets/analytical-operator.md) by default.
+- Read [references/style-profile.md](references/style-profile.md) when the user wants a more neutral fallback voice.
